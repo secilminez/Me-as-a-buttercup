@@ -1,4 +1,4 @@
-# Buttercup — Loud, Green, Unbothered
+# Buttercup Loud, Green, Unbothered
 
 A single-page personal theme website built as a self-directed project to learn the fundamentals of web design: HTML structure, CSS styling and layout, and basic JavaScript interactivity.
 
@@ -19,4 +19,4 @@ A single-page personal theme website built as a self-directed project to learn t
 
 ## About this project
 
-This was created as a hands-on way to understand how a website comes together from scratch and how to publish one using GitHub Pages from writing the code, to hosting it, to managing updates through GitHub.
+This was created as a hands on way to understand how a website comes together from scratch and how to publish one using GitHub Pages from writing the code, to hosting it, to managing updates through GitHub.
