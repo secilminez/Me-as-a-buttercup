@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Buttercup — Loud, Green, Unbothered</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #F7F3E8;
+    --ink: #1B2B1D;
+    --yellow: #F4C430;
+    --moss: #4C6444;
+    --coral: #E8553D;
+    --sage: #A8BFA0;
+    --line: rgba(27,43,29,0.14);
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .display{
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    line-height: 0.95;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  a{ color: inherit; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- layout shell ---------- */
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--cream);
+    border-bottom: 2px solid var(--ink);
+  }
+  nav .wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .brand{
+    font-family:'Archivo Black', sans-serif;
+    font-size: 1.1rem;
+  }
+  .brand .dot{ color: var(--coral); }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap: 24px;
+    margin:0; padding:0;
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+  nav a{ text-decoration:none; position:relative; }
+  nav a::after{
+    content:'';
+    position:absolute; left:0; right:0; bottom:-4px;
+    height: 3px; background: var(--yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .2s ease;
+  }
+  nav a:hover::after{ transform: scaleX(1); }
+
+  /* ---------- hero ---------- */
+  header.hero{
+    position: relative;
+    padding: 90px 0 70px;
+    border-bottom: 2px solid var(--ink);
+    overflow: hidden;
+  }
+  .hero .wrap{ position: relative; z-index: 2; }
+  .kicker{
+    display:inline-block;
+    background: var(--ink);
+    color: var(--cream);
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 6px 12px;
+    border-radius: 3px;
+    margin-bottom: 22px;
+    transform: rotate(-2deg);
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 8vw, 5.2rem);
+    color: var(--ink);
+  }
+  .hero h1 span{
+    color: var(--moss);
+    -webkit-text-stroke: 2px var(--ink);
+  }
+  .hero p.lede{
+    max-width: 46ch;
+    font-size: 1.15rem;
+    margin-top: 24px;
+    color: var(--ink);
+  }
+  .hero-petal{
+    position:absolute;
+    right: -60px;
+    top: -40px;
+    width: 340px;
+    height: 340px;
+    opacity: 0.9;
+    z-index: 1;
+    animation: spin 40s linear infinite;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg); } }
+
+  .hero-top{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-text{ flex: 1 1 380px; }
+
+  /* ---------- photo placeholders ---------- */
+  .photo-frame{
+    position:relative;
+    flex: 0 0 auto;
+    width: 240px;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--sage);
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: rotate(2deg);
+  }
+  .photo-frame.small{ width: 160px; transform: rotate(-2deg); }
+  .photo-frame img{
+    width:100%; height:100%;
+    object-fit: cover;
+    display:block;
+  }
+  .photo-fallback{
+    position:absolute; inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 18px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    color: var(--ink);
+    background:
+      repeating-linear-gradient(45deg, rgba(27,43,29,0.08) 0 10px, transparent 10px 20px);
+  }
+
+  .scribble-underline{
+    display:inline-block;
+    position:relative;
+  }
+
+  /* ---------- section headings ---------- */
+  section{ padding: 64px 0; border-bottom: 2px solid var(--ink); }
+  section:last-of-type{ border-bottom:none; }
+  .section-head{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap: 20px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  .section-head h2{ font-size: clamp(1.7rem, 4vw, 2.4rem); }
+  .section-head .tag{
+    font-weight:600;
+    color: var(--moss);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- traits ---------- */
+  .chips{
+    display:flex; flex-wrap:wrap; gap: 12px;
+  }
+  .chip{
+    border: 2px solid var(--ink);
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--cream);
+    transition: transform .15s ease, background .15s ease;
+  }
+  .chip:nth-child(3n+1){ background: var(--yellow); }
+  .chip:nth-child(3n+2){ background: var(--sage); }
+  .chip:nth-child(3n){ background: #fff; }
+  .chip:hover{ transform: translateY(-3px) rotate(-1deg); }
+
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items:start;
+  }
+  @media (max-width: 720px){ .about-grid{ grid-template-columns: 1fr; } }
+  .about-grid p{ font-size: 1.05rem; margin: 0 0 16px; }
+  .stat-card{
+    border: 2px solid var(--ink);
+    background: #fff;
+    padding: 22px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .stat-card .num{
+    font-family:'Archivo Black', sans-serif;
+    font-size: 2.4rem;
+    color: var(--coral);
+    display:block;
+  }
+  .stat-card .label{ font-weight:600; font-size:0.92rem; color: var(--moss); }
+  .stat-list{ display:grid; gap: 16px; }
+
+  /* ---------- interests ---------- */
+  .interest-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 720px){ .interest-grid{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 460px){ .interest-grid{ grid-template-columns: 1fr; } }
+  .interest{
+    border: 2px solid var(--ink);
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--cream);
+    min-height: 120px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .interest h3{ font-size: 1.05rem; font-family:'Space Grotesk',sans-serif; font-weight:700; }
+  .interest p{ margin: 8px 0 0; font-size: 0.9rem; color: var(--moss); }
+
+  /* ---------- mood button ---------- */
+  .mood-box{
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 40px 32px;
+    text-align:center;
+  }
+  .mood-box p.eyebrow{ margin:0 0 8px; color: var(--sage); font-weight:600; }
+  #moodline{
+    font-family:'Archivo Black', sans-serif;
+    font-size: clamp(1.3rem, 4vw, 2rem);
+    min-height: 2.6em;
+    display:flex; align-items:center; justify-content:center;
+    max-width: 60ch; margin: 0 auto;
+  }
+  button#moodbtn{
+    margin-top: 22px;
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size: 1rem;
+    background: var(--coral);
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 999px;
+    cursor:pointer;
+    transition: transform .12s ease;
+  }
+  button#moodbtn:active{ transform: scale(0.95); }
+  button#moodbtn:focus-visible, a:focus-visible, nav a:focus-visible{
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+  }
+  #mood-count{ margin-top: 14px; font-size: 0.85rem; color: var(--sage); }
+
+  footer{
+    padding: 36px 0 60px;
+    font-size: 0.9rem;
+    color: var(--moss);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">buttercup<span class="dot">.</span></div>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#likes">likes</a></li>
+      <li><a href="#mood">mood</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="hero-petal" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#1B2B1D" stroke-width="3">
+      <path d="M100 20 C120 55, 145 65, 180 100 C145 135, 120 145, 100 180 C80 145, 55 135, 20 100 C55 65, 80 55, 100 20 Z" fill="#F4C430"/>
+      <circle cx="100" cy="100" r="16" fill="#E8553D" stroke="#1B2B1D" stroke-width="3"/>
+    </g>
+  </svg>
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="hero-text">
+        <span class="kicker">unofficial mascot of nothing in particular</span>
+        <h1>tough as <span>weeds,</span><br>loud as spring.</h1>
+        <p class="lede">This is Buttercup's corner of the internet — a small, scrappy, yellow-green space for whoever clicks in. No filters, no soft edges, just opinions and a bit of noise.</p>
+      </div>
+      <!-- PHOTO SPOT 1: hero portrait -->
+      <div class="photo-frame">
+        <img src="PUT-YOUR-PHOTO-LINK-HERE.jpg" alt="Buttercup persona photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="photo-fallback">fotoğrafını buraya ekle</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>the deal</h2>
+      <span class="tag">field notes</span>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p>Buttercup doesn't do quiet rooms. She's the kind of persona built for showing up first, arguing the loudest, and still somehow winning people over by the end of it. Soft on the inside, sharp on the outside — like the flower she's named after, growing straight out of a crack in the sidewalk.</p>
+        <p>This page exists because sometimes the best way to learn how a website comes together is to build one with actual personality behind it, instead of a blank template waiting to be filled in.</p>
+        <div class="chips">
+          <span class="chip">stubborn</span>
+          <span class="chip">competitive</span>
+          <span class="chip">fiercely loyal</span>
+          <span class="chip">bad at losing</span>
+          <span class="chip">green everything</span>
+          <span class="chip">loud laugh</span>
+        </div>
+      </div>
+      <div class="stat-list">
+        <!-- PHOTO SPOT 2: about section portrait -->
+        <div class="photo-frame small" style="margin: 0 auto 4px;">
+          <img src="PUT-YOUR-PHOTO-LINK-HERE-2.jpg" alt="Buttercup candid photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-fallback">fotoğrafını buraya ekle</div>
+        </div>
+        <div class="stat-card">
+          <span class="num">01</span>
+          <span class="label">rule: never backs down from a challenge</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">02</span>
+          <span class="label">rule: green is not just a color, it's a mood</span>
+        </div>
+        <div class="stat-card">
+          <span class="num">03</span>
+          <span class="label">rule: soft heart, sharp elbows</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="likes">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>things worth the noise</h2>
+      <span class="tag">currently into</span>
+    </div>
+    <div class="interest-grid">
+      <div class="interest">
+        <h3>Arm-wrestling anyone who asks</h3>
+        <p>Undefeated. Allegedly.</p>
+      </div>
+      <div class="interest">
+        <h3>Weeds that grow through concrete</h3>
+        <p>Personal role models.</p>
+      </div>
+      <div class="interest">
+        <h3>Storms, not drizzle</h3>
+        <p>Go big or stay inside.</p>
+      </div>
+      <div class="interest">
+        <h3>Winning arguments</h3>
+        <p>Especially the small, pointless ones.</p>
+      </div>
+      <div class="interest">
+        <h3>Old sneakers</h3>
+        <p>Broken in, never broken.</p>
+      </div>
+      <div class="interest">
+        <h3>Loud playlists</h3>
+        <p>Volume as a personality trait.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mood">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ask about the mood</h2>
+      <span class="tag">click it</span>
+    </div>
+    <div class="mood-box">
+      <p class="eyebrow">current status</p>
+      <div id="moodline">feisty, but manageable.</div>
+      <button id="moodbtn">poke the buttercup</button>
+      <div id="mood-count"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%; flex-wrap:wrap; gap:10px;">
+    <span>built loud, on purpose.</span>
+    <span>green since always.</span>
+  </div>
+</footer>
+
+<script>
+  const moods = [
+    "feisty, but manageable.",
+    "one bad joke away from a comeback.",
+    "running on spite and iced tea.",
+    "loud on the outside, plotting on the inside.",
+    "just won an argument nobody was having.",
+    "green mood, greener attitude.",
+    "not sorry, actually.",
+    "storm's brewing, stand back.",
+    "annoyingly right, as usual.",
+    "soft today. don't tell anyone."
+  ];
+  const line = document.getElementById('moodline');
+  const counter = document.getElementById('mood-count');
+  const btn = document.getElementById('moodbtn');
+  let pokes = 0;
+  let lastIndex = -1;
+
+  btn.addEventListener('click', () => {
+    pokes++;
+    let next = lastIndex;
+    while(next === lastIndex){
+      next = Math.floor(Math.random() * moods.length);
+    }
+    lastIndex = next;
+    line.textContent = moods[next];
+    counter.textContent = pokes === 1 ? "poked once. bold move." : `poked ${pokes} times. she's counting.`;
+  });
+</script>
+
+</body>
+</html>
